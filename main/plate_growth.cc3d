@@ -1,0 +1,5 @@
+<Simulation version="4.2.5">
+   <XMLScript Type="XMLScript">Simulation/plate_growth.xml</XMLScript>
+   <PythonScript Type="PythonScript">Simulation/plate_growth.py</PythonScript>
+   <Resource Type="Python">Simulation/plate_growthSteppables.py</Resource>
+</Simulation>

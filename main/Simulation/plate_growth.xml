@@ -1,0 +1,199 @@
+<CompuCell3D Revision="20210612" Version="4.2.5">
+   
+   <Metadata>
+      
+      <!-- Basic properties simulation -->
+      <NumberOfProcessors>1</NumberOfProcessors>
+      <DebugOutputFrequency>10</DebugOutputFrequency>
+      <!-- <NonParallelModule Name="Potts"/> -->
+   </Metadata>
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="1024" y="1024" z="32"/>
+      <Steps>100000</Steps>
+      <Temperature>10.0</Temperature>
+      <NeighborOrder>1</NeighborOrder>
+      <Boundary_x>Periodic</Boundary_x>
+      <Boundary_y>Periodic</Boundary_y>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" Freeze="" TypeName="wall"/>
+      <CellType TypeId="2" TypeName="healthy"/>
+      <CellType TypeId="3" TypeName="intermediary"/>
+      <CellType TypeId="4" TypeName="infected"/>
+      <CellType TypeId="5" TypeName="blebing"/>
+      <CellType TypeId="6" TypeName="dead"/>
+   </Plugin>
+   
+   <Plugin Name="Volume"/>
+   
+   <Plugin Name="ExternalPotential">
+      
+      <!-- External force applied to cell. Each cell has different force and force components have to be managed in Python. -->
+      <!-- e.g. cell.lambdaVecX=0.5; cell.lambdaVecY=0.1 ; cell.lambdaVecZ=0.3; -->
+      <Algorithm>PixelBased</Algorithm>
+   </Plugin>
+   
+   <Plugin Name="CenterOfMass">
+      
+      <!-- Module tracking center of mass of each cell -->
+   </Plugin>
+   
+   <Plugin Name="NeighborTracker">
+      
+      <!-- Module tracking neighboring cells of each cell -->
+   </Plugin>
+   
+   <Plugin Name="MomentOfInertia">
+      
+      <!-- Module tracking moment of inertia of each cell -->
+   </Plugin>
+   
+   <Plugin Name="Contact">
+      <!-- Specification of adhesion energies -->
+      <Energy Type1="Medium" Type2="Medium">10.0</Energy>
+      <Energy Type1="Medium" Type2="wall">10.0</Energy>
+      <Energy Type1="Medium" Type2="healthy">10.0</Energy>
+      <Energy Type1="Medium" Type2="intermediary">10.0</Energy>
+      <Energy Type1="Medium" Type2="infected">10.0</Energy>
+      <Energy Type1="Medium" Type2="blebing">10.0</Energy>
+      <Energy Type1="Medium" Type2="dead">10.0</Energy>
+      <Energy Type1="wall" Type2="wall">10.0</Energy>
+      <Energy Type1="wall" Type2="healthy">10.0</Energy>
+      <Energy Type1="wall" Type2="intermediary">10.0</Energy>
+      <Energy Type1="wall" Type2="infected">10.0</Energy>
+      <Energy Type1="wall" Type2="blebing">10.0</Energy>
+      <Energy Type1="wall" Type2="dead">10.0</Energy>
+      <Energy Type1="healthy" Type2="healthy">10.0</Energy>
+      <Energy Type1="healthy" Type2="intermediary">10.0</Energy>
+      <Energy Type1="healthy" Type2="infected">10.0</Energy>
+      <Energy Type1="healthy" Type2="blebing">10.0</Energy>
+      <Energy Type1="healthy" Type2="dead">10.0</Energy>
+      <Energy Type1="intermediary" Type2="intermediary">10.0</Energy>
+      <Energy Type1="intermediary" Type2="infected">10.0</Energy>
+      <Energy Type1="intermediary" Type2="blebing">10.0</Energy>
+      <Energy Type1="intermediary" Type2="dead">10.0</Energy>
+      <Energy Type1="infected" Type2="infected">10.0</Energy>
+      <Energy Type1="infected" Type2="blebing">10.0</Energy>
+      <Energy Type1="infected" Type2="dead">10.0</Energy>
+      <Energy Type1="blebing" Type2="blebing">10.0</Energy>
+      <Energy Type1="blebing" Type2="dead">10.0</Energy>
+      <Energy Type1="dead" Type2="dead">10.0</Energy>
+      <NeighborOrder>4</NeighborOrder>
+   </Plugin>
+   
+   <!-- <Plugin Name="Compartment"> -->
+      
+      <!-- &lt;!&ndash; Specification of adhesion energies in the presence of compartmental cells &ndash;&gt;  -->
+      <!-- &lt;!&ndash; This plugin is deprecated - please consider using Contact and ContactInternal plugins instead &ndash;&gt;  -->
+      <!-- &lt;!&ndash; to specify adhesions bewtween members of same cluster &ndash;&gt;  -->
+      <!-- <Energy Type1="Medium" Type2="Medium">10.0</Energy> -->
+      <!-- <Energy Type1="Medium" Type2="wall">10.0</Energy> -->
+      <!-- <Energy Type1="Medium" Type2="healthy">10.0</Energy> -->
+      <!-- <Energy Type1="Medium" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="Medium" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="Medium" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="Medium" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="wall">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="healthy">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="healthy">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="infected" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="infected" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="infected" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="blebing" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="blebing" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="dead" Type2="dead">10.0</Energy> -->
+      <!-- <InternalEnergy Type1="wall" Type2="wall">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="wall" Type2="healthy">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="wall" Type2="intermediary">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="wall" Type2="infected">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="wall" Type2="blebing">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="wall" Type2="dead">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="healthy" Type2="healthy">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="healthy" Type2="intermediary">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="healthy" Type2="infected">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="healthy" Type2="blebing">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="healthy" Type2="dead">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="intermediary" Type2="intermediary">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="intermediary" Type2="infected">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="intermediary" Type2="blebing">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="intermediary" Type2="dead">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="infected" Type2="infected">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="infected" Type2="blebing">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="infected" Type2="dead">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="blebing" Type2="blebing">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="blebing" Type2="dead">5.0</InternalEnergy> -->
+      <!-- <InternalEnergy Type1="dead" Type2="dead">5.0</InternalEnergy> -->
+      <!-- <NeighborOrder>4</NeighborOrder> -->
+   <!-- </Plugin> -->
+   
+   <!-- <Plugin Name="ContactInternal"> -->
+      <!-- &lt;!&ndash; Specification of internal adhesion energies &ndash;&gt;  -->
+      <!-- <Energy Type1="wall" Type2="wall">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="healthy">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="wall" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="healthy">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="healthy" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="intermediary">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="intermediary" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="infected" Type2="infected">10.0</Energy> -->
+      <!-- <Energy Type1="infected" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="infected" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="blebing" Type2="blebing">10.0</Energy> -->
+      <!-- <Energy Type1="blebing" Type2="dead">10.0</Energy> -->
+      <!-- <Energy Type1="dead" Type2="dead">10.0</Energy> -->
+      <!-- <NeighborOrder>4</NeighborOrder> -->
+   <!-- </Plugin> -->
+   
+   <Plugin Name="LengthConstraint">
+      
+      <!-- Applies elongation constraint to each cell. Users specify target length of major axis -TargetLength (in 3D additionally, target length of minor axis - MinorTargetLength) and a strength of the constraint -LambdaLength. Parameters are specified for each cell type -->
+      <!-- IMPORTANT: To prevent cell fragmentation for large elongations you need to also use connectivity constraint -->
+      <!-- LengthConstraint plugin with no body: <Plugin Name="LengthConstraint"/> permits constraint specification for individual cells -->
+      <!-- Comment out the constrains for cell types which don't need them -->
+      <!-- <LengthEnergyParameters CellType="wall" LambdaLength="2.0" MinorTargetLength="5.0" TargetLength="25"/> -->
+      <!-- <LengthEnergyParameters CellType="healthy" LambdaLength="2.0" MinorTargetLength="5.0" TargetLength="25"/> -->
+      <!-- <LengthEnergyParameters CellType="intermediary" LambdaLength="2.0" MinorTargetLength="5.0" TargetLength="25"/> -->
+      <!-- <LengthEnergyParameters CellType="infected" LambdaLength="2.0" MinorTargetLength="5.0" TargetLength="25"/> -->
+      <!-- <LengthEnergyParameters CellType="blebing" LambdaLength="2.0" MinorTargetLength="5.0" TargetLength="25"/> -->
+      <!-- <LengthEnergyParameters CellType="dead" LambdaLength="2.0" MinorTargetLength="5.0" TargetLength="25"/> -->
+   </Plugin>
+   
+   <!-- <Steppable Type="UniformInitializer"> -->
+      
+      <!-- &lt;!&ndash; Initial layout of cells in the form of rectangular slab &ndash;&gt;  -->
+      <!-- <Region> -->
+         <!-- <BoxMin x="204" y="204" z="6"/> -->
+         <!-- <BoxMax x="819" y="819" z="25"/> -->
+         <!-- <Gap>0</Gap> -->
+         <!-- <Width>7</Width> -->
+         <!-- <Types>wall,healthy,intermediary,infected,blebing,dead</Types> -->
+      <!-- </Region> -->
+   <!-- </Steppable> -->
+</CompuCell3D>
